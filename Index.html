@@ -1,0 +1,418 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>PatBen’s farms - Coconut, Pigs, Cassava & Plantain</title>
+  <style>
+    :root{
+      --bg:#0b2a1a;
+      --card:#0f3a24;
+      --text:#eaf7ef;
+      --muted:#b9d6c2;
+      --accent:#2dd46f;
+      --accent2:#ffd166;
+      --border:rgba(255,255,255,.12);
+      --shadow: 0 10px 30px rgba(0,0,0,.25);
+      --radius:18px;
+    }
+
+    *{ box-sizing:border-box; }
+    body{
+      margin:0;
+      font-family: system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, sans-serif;
+      background: radial-gradient(900px 500px at 20% 0%, rgba(45,212,111,.18), transparent 60%),
+                  radial-gradient(900px 500px at 100% 10%, rgba(255,209,102,.12), transparent 60%),
+                  var(--bg);
+      color:var(--text);
+      line-height:1.5;
+    }
+
+    header{
+      padding: 26px 18px 8px;
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+
+    .topbar{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:12px;
+      flex-wrap:wrap;
+    }
+
+    .brand{
+      display:flex;
+      align-items:center;
+      gap:12px;
+    }
+
+    .logo{
+      width:44px;height:44px;
+      border-radius:14px;
+      background: linear-gradient(135deg, rgba(45,212,111,.9), rgba(255,209,102,.6));
+      box-shadow: var(--shadow);
+      border:1px solid rgba(255,255,255,.25);
+      position:relative;
+      overflow:hidden;
+    }
+    .logo::after{
+      content:"";
+      position:absolute; inset:-30px -10px auto auto;
+      width:70px; height:70px;
+      background: rgba(255,255,255,.16);
+      transform: rotate(25deg);
+      border-radius:20px;
+    }
+
+    .brand h1{
+      margin:0;
+      font-size: 18px;
+      letter-spacing:.2px;
+    }
+    .brand p{
+      margin:0;
+      color:var(--muted);
+      font-size: 13px;
+    }
+
+    .container{
+      max-width:1100px;
+      margin:0 auto;
+      padding: 18px;
+    }
+
+    .hero{
+      display:grid;
+      grid-template-columns: 1.2fr .8fr;
+      gap:18px;
+      align-items:stretch;
+      margin-top: 10px;
+    }
+
+    @media (max-width: 860px){
+      .hero{ grid-template-columns: 1fr; }
+    }
+
+    .card{
+      background: linear-gradient(180deg, rgba(255,255,255,.05), rgba(255,255,255,.02));
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      padding: 18px;
+    }
+
+    .headline{
+      font-size: 34px;
+      margin: 0 0 8px;
+      letter-spacing:-.6px;
+      line-height:1.15;
+    }
+
+    .sub{
+      margin:0 0 14px;
+      color: var(--muted);
+      font-size: 16px;
+    }
+
+    .pillrow{
+      display:flex;
+      flex-wrap:wrap;
+      gap:10px;
+      margin: 12px 0 14px;
+    }
+    .pill{
+      padding: 10px 12px;
+      border-radius: 999px;
+      background: rgba(45,212,111,.12);
+      border: 1px solid rgba(45,212,111,.25);
+      color: var(--text);
+      font-size: 13px;
+    }
+    .pill.yellow{
+      background: rgba(255,209,102,.12);
+      border-color: rgba(255,209,102,.28);
+    }
+
+    .ctaGrid{
+      display:grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap:10px;
+      margin-top: 14px;
+    }
+    @media (max-width: 520px){
+      .ctaGrid{ grid-template-columns: 1fr; }
+    }
+
+    .btn{
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      gap:10px;
+      padding: 12px 14px;
+      border-radius: 14px;
+      text-decoration:none;
+      border: 1px solid rgba(255,255,255,.16);
+      background: rgba(255,255,255,.06);
+      color: var(--text);
+      font-weight: 650;
+      transition: transform .12s ease, background .12s ease, border-color .12s ease;
+      user-select:none;
+    }
+    .btn:hover{
+      transform: translateY(-1px);
+      background: rgba(255,255,255,.09);
+      border-color: rgba(255,255,255,.24);
+    }
+
+    .btn.whatsapp{
+      border-color: rgba(45,212,111,.35);
+      background: rgba(45,212,111,.14);
+    }
+    .btn.call{
+      border-color: rgba(255,209,102,.35);
+      background: rgba(255,209,102,.12);
+    }
+    .btn.email{
+      border-color: rgba(88,170,255,.35);
+      background: rgba(88,170,255,.12);
+    }
+
+    .sectionTitle{
+      font-size: 18px;
+      margin: 0 0 10px;
+    }
+
+    .twoCols{
+      display:grid;
+      grid-template-columns: 1fr 1fr;
+      gap:14px;
+      margin-top: 14px;
+    }
+    @media (max-width: 860px){
+      .twoCols{ grid-template-columns: 1fr; }
+    }
+
+    .list{
+      margin:0;
+      padding-left: 18px;
+      color: var(--muted);
+    }
+
+    .note{
+      margin-top: 10px;
+      color: var(--muted);
+      font-size: 14px;
+      padding: 12px;
+      border-radius: 14px;
+      border: 1px dashed rgba(255,255,255,.18);
+      background: rgba(0,0,0,.10);
+    }
+
+    form{
+      display:grid;
+      gap:10px;
+    }
+
+    label{
+      color: var(--muted);
+      font-size: 13px;
+    }
+
+    input, textarea{
+      width:100%;
+      padding: 12px 12px;
+      border-radius: 14px;
+      border: 1px solid rgba(255,255,255,.16);
+      background: rgba(0,0,0,.10);
+      color: var(--text);
+      outline:none;
+    }
+    textarea{ min-height: 110px; resize: vertical; }
+
+    .formActions{
+      display:flex;
+      gap:10px;
+      flex-wrap:wrap;
+      margin-top: 4px;
+    }
+
+    .primary{
+      background: linear-gradient(135deg, rgba(45,212,111,.95), rgba(45,212,111,.55));
+      border-color: rgba(45,212,111,.55);
+      color: #052012;
+    }
+
+    footer{
+      padding: 26px 18px 36px;
+      max-width:1100px;
+      margin: 0 auto;
+      color: var(--muted);
+      font-size: 13px;
+    }
+
+    .smallRow{
+      display:flex;
+      flex-wrap:wrap;
+      gap:12px;
+      align-items:center;
+      margin-top: 10px;
+      color: var(--muted);
+    }
+    .smallRow span{
+      padding: 8px 10px;
+      border-radius: 999px;
+      border: 1px solid rgba(255,255,255,.14);
+      background: rgba(255,255,255,.04);
+    }
+  </style>
+</head>
+
+<body>
+  <header>
+    <div class="topbar">
+      <div class="brand">
+        <div class="logo" aria-hidden="true"></div>
+        <div>
+          <h1>PatBen’s farms</h1>
+          <p>New Ebu, Central Region</p>
+        </div>
+      </div>
+
+      <div class="smallRow" aria-label="Quick contact">
+        <span>WhatsApp: 0532892963</span>
+        <span>Call: 0556105581</span>
+      </div>
+    </div>
+  </header>
+
+  <main class="container">
+    <section class="hero">
+      <div class="card">
+        <h2 class="headline">Coconut, Pigs, Cassava &amp; Plantain</h2>
+        <p class="sub">
+          Welcome to <strong>PatBen’s farms</strong>. We grow and raise quality produce and animals from
+          <strong>New Ebu, Central Region</strong>. Prices change by season—message us for current availability.
+        </p>
+
+        <div class="pillrow">
+          <div class="pill">Coconut</div>
+          <div class="pill yellow">Plantain</div>
+          <div class="pill">Cassava</div>
+          <div class="pill yellow">Pigs</div>
+        </div>
+
+        <div class="ctaGrid">
+          <!-- WhatsApp (add your message text) -->
+          <a class="btn whatsapp" href="https://wa.me/233532892963?text=Hello%20PatBen%E2%80%99s%20farms%2C%20I%20would%20like%20to%20request%20availability%20and%20pricing.">
+            WhatsApp
+          </a>
+
+          <a class="btn call" href="tel:+233556105581">
+            Call
+          </a>
+
+          <a class="btn email" href="mailto:bann67894@gmail.com?subject=PatBen%E2%80%99s%20farms%20Inquiry&body=Hello%20PatBen%E2%80%99s%20farms%2C%0A%0AI%20would%20like%20to%20request%20availability%20and%20pricing.%0A%0AName%3A%0ALocation%3A%0AProduct%3A">
+            Email
+          </a>
+        </div>
+
+        <div class="note">
+          <strong>Pricing:</strong> No fixed prices. Please message us for current availability, quantities, and rates.
+        </div>
+      </div>
+
+      <aside class="card">
+        <h3 class="sectionTitle">What we offer</h3>
+        <ul class="list">
+          <li><strong>Coconut</strong> (seasonal availability)</li>
+          <li><strong>Pigs</strong> (availability varies)</li>
+          <li><strong>Cassava</strong></li>
+          <li><strong>Plantain</strong></li>
+        </ul>
+
+        <div class="note" style="margin-top:14px;">
+          <strong>Location:</strong> New Ebu, Central Region.
+          <br/>
+          <span style="color: var(--muted);">Contact us for pickup/delivery options.</span>
+        </div>
+      </aside>
+    </section>
+
+    <section class="twoCols">
+      <div class="card">
+        <h3 class="sectionTitle">About PatBen’s farms</h3>
+        <p class="sub" style="margin:0;">
+          We focus on dependable farming and rearing, with produce and animals to support everyday needs.
+          Our offerings change with the season, so please contact us for the latest availability.
+        </p>
+      </div>
+
+      <div class="card">
+        <h3 class="sectionTitle">Request availability / pricing (WhatsApp)</h3>
+        <p class="sub" style="margin-top:-2px;">
+          Fill the form—your message will open in WhatsApp with our number.
+        </p>
+
+        <form id="contactForm">
+          <div>
+            <label for="name">Your name</label>
+            <input id="name" name="name" placeholder="e.g., Ama Mensah" required />
+          </div>
+
+          <div>
+            <label for="product">Product you want</label>
+            <input id="product" name="product" placeholder="e.g., Coconut / Pigs / Cassava / Plantain" required />
+          </div>
+
+          <div>
+            <label for="message">Message</label>
+            <textarea id="message" name="message" placeholder="Quantity, location, and when you need it..."></textarea>
+          </div>
+
+          <div class="formActions">
+            <button class="btn primary" type="submit">Send via WhatsApp</button>
+            <a class="btn" href="mailto:bann67894@gmail.com?subject=PatBen%E2%80%99s%20farms%20Inquiry">Use Email Instead</a>
+          </div>
+        </form>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div>
+      <strong>PatBen’s farms</strong> — New Ebu, Central Region.
+      <div style="margin-top:8px;">
+        WhatsApp: 0532892963 · Call: 0556105581 · Email: bann67894@gmail.com
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    const WA_NUMBER_E164_NO_PLUS = "233532892963"; // WhatsApp number for wa.me
+    const EMAIL = "bann67894@gmail.com";
+
+    const form = document.getElementById("contactForm");
+
+    form.addEventListener("submit", (e) => {
+      e.preventDefault();
+
+      const name = document.getElementById("name").value.trim();
+      const product = document.getElementById("product").value.trim();
+      const message = document.getElementById("message").value.trim();
+
+      const text =
+        "Hello PatBen’s farms,\n\n" +
+        "My name: " + name + "\n" +
+        "Product: " + product + "\n" +
+        (message ? ("Message: " + message + "\n\n") : "\n\n") +
+        "Please share current availability and pricing (no fixed prices).\n\n" +
+        "Thank you.";
+
+      const url = "https://wa.me/" + WA_NUMBER_E164_NO_PLUS + "?text=" + encodeURIComponent(text);
+      window.open(url, "_blank");
+    });
+  </script>
+</body>
+</html>
